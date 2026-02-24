@@ -53,6 +53,8 @@ curl -X POST http://127.0.0.1:5000/login \
 -d "{\"username\":\"testuser\",\"password\":\"StrongPassword123@\"}"
 ```
 
+4. To test using test_client_auth.py, run the app.py file using `python app.py`in the auth_microservice directory, then run `python test_client_auth.py` in the main directory
+
 UML Diagram:
 
 ![Auth Microservice UML Diagram](assets/UML_diagram.png "Auth Microservice UML Diagram")
