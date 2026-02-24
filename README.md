@@ -18,14 +18,35 @@ You should see something like this:
 
 3. To test, open another terminal and test with curl:
 
-For register: 
+- To register a user, two parameters must be sent:
+  - username: str (must be a unique username)
+  - password: str
+    - requires at least 8 characters
+    - requires at least one uppercase letter
+    - requires at least one lowercase
+    - requires at least one symbol
+- Information received will include:
+  - message: str
+  - status: str
+
+Register Example:
 ```
 curl -X POST http://127.0.0.1:5000/register \
 -H "Content-Type: application/json" \
 -d "{\"username\":\"testuser\",\"password\":\"StrongPassword123@\"}"
 ```
 
-For login: 
+- To login a registered user, two parameters must be sent:
+  - username: str
+  - password: str
+- On success, information received will include:
+  - status: str
+  - token: str
+- On fail, information received will include:
+  - status: str
+  - message: str
+  
+Login Example: 
 ```
 curl -X POST http://127.0.0.1:5000/login \
 -H "Content-Type: application/json" \
@@ -33,4 +54,5 @@ curl -X POST http://127.0.0.1:5000/login \
 ```
 
 UML Diagram:
+
 ![Auth Microservice UML Diagram](assets/UML_diagram.png "Auth Microservice UML Diagram")
