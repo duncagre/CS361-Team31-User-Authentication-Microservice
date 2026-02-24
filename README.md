@@ -120,6 +120,8 @@ To test using the provided test client:
 
 The test program sends POST requests to /register and /login and prints the JSON responses returned by the microservice.
 
-UML Diagram:
+---
+
+## UML SEQUENCES DIAGRAM
 
 ![Auth Microservice UML Diagram](assets/UML_diagram.png "Auth Microservice UML Diagram")
