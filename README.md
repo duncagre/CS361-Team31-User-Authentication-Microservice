@@ -1,59 +1,124 @@
 # CS361-Team31-User-Authentication-Microservice
-User Authentication microservice for CS361 Team 31. Provides user registration, login, and token validation via REST API using JSON.
 
-## How to use:
-1. First install the required packages
-- Flask
-- PyJWT
+User Authentication microservice for CS361 Team 31.  
+Provides user registration and login via REST API using JSON.
 
-```pip install flask pyjwt```
+---
 
-2. Run the app by going in the same folder as app.py and run
+## DESCRIPTION
 
-```python app.py```
+This microservice allows a client to:
 
-You should see something like this:
+- Register a new user with a secure password.
+- Log in using valid credentials.
+- Receive a signed JWT token upon successful login.
 
-```Running on http://127.0.0.1:5000```
+The service communicates exclusively via HTTP POST requests using JSON.
 
-3. To test, open another terminal and test with curl:
+---
 
-- To register a user, two parameters must be sent:
-  - username: str (must be a unique username)
-  - password: str
-    - requires at least 8 characters
-    - requires at least one uppercase letter
-    - requires at least one lowercase
-    - requires at least one symbol
-- Information received will include:
-  - message: str
-  - status: str
+## INSTALLATION
 
-Register Example:
-```
+Install required packages:
+
+pip install flask pyjwt
+
+Run the application:
+
+python app.py
+
+The service runs on:
+
+http://127.0.0.1:5000
+
+---
+
+## HOW TO REQUEST DATA
+
+All requests must:
+- Use HTTP POST
+- Include header: Content-Type: application/json
+- Include a JSON body
+
+### POST /register
+
+Required JSON fields:
+- username (string, must be unique)
+- password (string)
+  - Minimum 8 characters
+  - At least one uppercase letter
+  - At least one lowercase letter
+  - At least one symbol
+
+Example request:
+
 curl -X POST http://127.0.0.1:5000/register \
 -H "Content-Type: application/json" \
 -d "{\"username\":\"testuser\",\"password\":\"StrongPassword123@\"}"
-```
 
-- To login a registered user, two parameters must be sent:
-  - username: str
-  - password: str
-- On success, information received will include:
-  - status: str
-  - token: str
-- On fail, information received will include:
-  - status: str
-  - message: str
-  
-Login Example: 
-```
+---
+
+### POST /login
+
+Required JSON fields:
+- username (string)
+- password (string)
+
+Example request:
+
 curl -X POST http://127.0.0.1:5000/login \
 -H "Content-Type: application/json" \
 -d "{\"username\":\"testuser\",\"password\":\"StrongPassword123@\"}"
-```
 
-4. To test using test_client_auth.py, run the app.py file using `python app.py`in the auth_microservice directory, then run `python test_client_auth.py` in the main directory
+---
+
+## HOW TO RECEIVE DATA
+
+All responses are returned in JSON format.
+
+### /register responses
+
+Success (201 Created):
+{
+  "status": "success",
+  "message": "User registered"
+}
+
+Failure (400 Bad Request):
+{
+  "status": "error",
+  "message": "Reason for failure"
+}
+
+---
+
+### /login responses
+
+Success (200 OK):
+{
+  "status": "success",
+  "token": "<jwt_token_string>"
+}
+
+Failure (401 Unauthorized):
+{
+  "status": "error",
+  "message": "Invalid credentials"
+}
+
+---
+
+## TEST PROGRAM
+
+To test using the provided test client:
+
+1. Run the microservice:
+   python app.py
+
+2. In a separate terminal, run:
+   python test_client_auth.py
+
+The test program sends POST requests to /register and /login and prints the JSON responses returned by the microservice.
 
 UML Diagram:
 
