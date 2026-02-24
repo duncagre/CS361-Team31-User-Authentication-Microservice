@@ -31,3 +31,6 @@ curl -X POST http://127.0.0.1:5000/login \
 -H "Content-Type: application/json" \
 -d "{\"username\":\"testuser\",\"password\":\"StrongPassword123@\"}"
 ```
+
+UML Diagram:
+![Auth Microservice UML Diagram](assets/UML_diagram.png "Auth Microservice UML Diagram")
